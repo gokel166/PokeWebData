@@ -12,13 +12,23 @@ const connection = mysql.createConnection({
     database : 'PokemonDat'
 });
 
-connection.connect(function(err){
+connection.connect((err) => {
     if (err) {
         Console.error('error connecting: ' + err.stack);
         return;
     }
 
     console.log('connected as id ' + connection.threadId);
+});
+
+// Create db
+router.get('/users', (req, res) => {
+    let sql = 'CREATE DATABASE PokemonDat';
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send('database created...')
+    });
 });
 
 // Error handling
