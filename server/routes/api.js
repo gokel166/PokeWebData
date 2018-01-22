@@ -7,8 +7,8 @@ const mysql = require('mysql');
 // Connect
 const connection = mysql.createConnection({
     host : 'localhost',
-    user : '',
-    password : '',
+    user : 'root',
+    password : 'Glokgun166!',
     database : 'PokemonDat'
 });
 
@@ -36,19 +36,5 @@ let response = {
 };
 
 // Get users
-router.get('/users', (req, res) => {
-    connection((db) => {
-        db.collection('users')
-            .find()
-            .toArray()
-            .then((users) => {
-                response.data = users;
-                res.json(response);
-            })
-            .catch((err) => {
-                sendError(err, res);
-            });
-    });
-});
 
 module.exports = router;
