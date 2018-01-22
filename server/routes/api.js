@@ -2,15 +2,24 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const mysql = require('mysql');
 
 // Connect
-const connection = (closure) => {
-    return MongoClient.connect('mongodb://localhost:27017/mean', (err, db) => {
-        if (err) return console.log(err);
+const connection = mysql.createConnection({
+    host : 'localhost',
+    user : '',
+    password : '',
+    database : 'PokemonDat'
+});
 
-        closure(db);
-    });
-};
+connection.connect(function(err){
+    if (err) {
+        Console.error('error connecting: ' + err.stack);
+        return;
+    }
+
+    console.log('connected as id ' + connection.threadId);
+});
 
 // Error handling
 const sendError = (err, res) => {
